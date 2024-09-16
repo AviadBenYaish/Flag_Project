@@ -1,8 +1,7 @@
 import pygame
-
+from game_field import get_x_y_position
 import consts
 from game_field import grass_positions
-from soldier import soldier_position
 
 screen = pygame.display.set_mode((consts.SCREEN_WIDTH, consts.SCREEN_HEIGHT))
 positions_of_grass = grass_positions()
@@ -12,8 +11,8 @@ def screen_update(state):
     screen.fill(consts.BACKGROUND_COLOR)
     draw_grass()
     draw_background_bombs()
-    # soldier_position_x_y = get_x_y_position()
-    draw_soldier(consts.PLAYER_INITIAL_POSITION_SCREEN)
+    draw_soldier(state["soldier_position"])
+    draw_flag()
     pygame.display.flip()
 
 
@@ -23,13 +22,16 @@ def draw_grass():
         image_rect = image.get_rect(topleft=position)
         screen.blit(image, image_rect)
 def draw_flag():
-    image = pygame.transform.scale(consts.GRASS_IMAGE, (50, 50))
-    image_rect = image.get_rect(topleft=position)
+    flag_position = get_x_y_position(consts.FLAG_POSITION)
+    image = pygame.transform.scale(consts.FLAG_IMAGE, (100, 100))
+    image_rect = image.get_rect(topleft=flag_position)
     screen.blit(image, image_rect)
 
+
 def draw_soldier(position):
+    soldier_position_x_y = get_x_y_position(position)
     image = pygame.transform.scale(consts.PLAYER_IMAGE, consts.PLAYER_SIZE)
-    image_rect = image.get_rect(topleft=position)
+    image_rect = image.get_rect(topleft=(soldier_position_x_y[0], soldier_position_x_y[1] + consts.BLOCK_SIZE[0] / 3))
     screen.blit(image, image_rect)
 
 
