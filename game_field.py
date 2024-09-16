@@ -1,10 +1,9 @@
 import consts
 import random
 
-
+game_matrix = []
 def game_field():
     bomb_count = 0
-    game_matrix = []
     for i in range(25):
         game_row = []
         for j in range(50):
@@ -52,4 +51,10 @@ def get_x_y_position(grid_position):
     col = grid_position[1]
     x = col * consts.BLOCK_SIZE[0]
     y = row * consts.BLOCK_SIZE[0]
-    return (x, y)
+    return x, y
+
+def hit_mine(soldier_position):
+    leg1 = (game_matrix[soldier_position[0] + 3], game_matrix[soldier_position[1]])
+    leg2 = (game_matrix[soldier_position[0] + 3], game_matrix[soldier_position[1]] + 1)
+    print(leg1)
+    print(leg2)
