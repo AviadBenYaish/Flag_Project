@@ -1,5 +1,5 @@
 import pygame
-
+from soldier import *
 import consts
 from game_field import grass_positions
 from screen import screen, screen_update
@@ -14,5 +14,8 @@ def main():
         screen_update(state)
 
 def handling_user_events():
-    print()
+    moving_up(state["soldier_position"])
+    print(moving_up(state["soldier_position"]))
+handling_user_events()
 main()
+handling_user_events()
