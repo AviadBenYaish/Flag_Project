@@ -1,7 +1,4 @@
-from pprint import PrettyPrinter
-
 import pygame
-from pygame.examples.grid import WINDOW_WIDTH, WINDOW_HEIGHT
 
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 640
@@ -21,4 +18,7 @@ PLAYER_INITIAL_POSITION = (0, 0)
 PLAYER_INITIAL_POSITION_SCREEN = (0, BLOCK_SIZE[0] / 3)
 PLAYER_SIZE = (410 / 6, 512 / 6)
 EMPTY_SQUARE = 'EMPTY'
+RUNNING_STATE = 1
+LOSING_STATE = 2
+WINING_STATE = 3
 
