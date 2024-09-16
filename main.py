@@ -1,4 +1,6 @@
 import pygame
+
+import soldier
 from soldier import *
 import consts
 from game_field import *
@@ -19,6 +21,20 @@ def handling_user_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             state["is_window_open"] = False
-    print()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                state["soldier_position"] = soldier.moving_up(state["soldier_position"])
+                print(state["soldier_position"])
+            if event.key == pygame.K_DOWN:
+                state["soldier_position"] = soldier.moving_down(state["soldier_position"])
+                print(state["soldier_position"])
+            if event.key == pygame.K_RIGHT:
+                state["soldier_position"] = soldier.moving_right(state["soldier_position"])
+                print(state["soldier_position"])
+            if event.key == pygame.K_LEFT:
+                state["soldier_position"] = soldier.moving_left(state["soldier_position"])
+                print(state["soldier_position"])
+
+
 main()
 handling_user_events()
