@@ -13,5 +13,6 @@ FLAG_IMAGE = pygame.image.load("./images/flag.png")
 LINES_COLOR = (0, 102, 0)
 PLAYER_IMAGE = pygame.image.load("./images/soldier.png")
 PLAYER_INITIAL_POSITION = (0, 0)
-PLAYER_SIZE = (410 / 5, 512 / 5)
+PLAYER_INITIAL_POSITION_SCREEN = (0, BLOCK_SIZE[0] / 3)
+PLAYER_SIZE = (410 / 6, 512 / 6)
 EMPTY_SQUARE = 'EMPTY'

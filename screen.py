@@ -1,8 +1,8 @@
 import pygame
-from pygame.draw import lines
 
 import consts
 from game_field import grass_positions
+from soldier import soldier_position
 
 screen = pygame.display.set_mode((consts.SCREEN_WIDTH, consts.SCREEN_HEIGHT))
 positions_of_grass = grass_positions()
@@ -12,7 +12,8 @@ def screen_update(state):
     screen.fill(consts.BACKGROUND_COLOR)
     draw_grass()
     draw_background_bombs()
-    draw_soldier(state["soldier_position"])
+    # soldier_position_x_y = get_x_y_position()
+    draw_soldier(consts.PLAYER_INITIAL_POSITION_SCREEN)
     pygame.display.flip()
 
 
@@ -33,5 +34,11 @@ def draw_soldier(position):
 
 
 def draw_background_bombs():
-    for i in range(consts.BLOCK_SIZE[0], consts.BLOCK_SIZE[0]*50, consts.BLOCK_SIZE[0]):
-        pygame.draw.line(screen, consts.LINES_COLOR, (i, 0), (i, consts.SCREEN_HEIGHT))
+    block_position = consts.BLOCK_SIZE[0]
+    for i in range(49):
+        pygame.draw.line(screen, consts.LINES_COLOR, (block_position, 0), (block_position, consts.SCREEN_HEIGHT))
+        block_position += consts.BLOCK_SIZE[0]
+    block_position = consts.BLOCK_SIZE[0]
+    for i in range(24):
+        pygame.draw.line(screen, consts.LINES_COLOR, (0, block_position), (consts.SCREEN_WIDTH, block_position))
+        block_position += consts.BLOCK_SIZE[0]
