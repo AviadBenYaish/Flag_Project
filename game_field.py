@@ -35,6 +35,9 @@ def game_field():
 
     return game_matrix
 
+
+
+
 def grass_positions():
     grass_positions_list = []
     for i in range(20):

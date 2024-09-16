@@ -1,8 +1,7 @@
 import pygame
 from soldier import *
-from game_field import get_x_y_position, game_field
 import consts
-from game_field import grass_positions
+from game_field import *
 from screen import screen, screen_update
 
 state = {
