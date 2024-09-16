@@ -1,0 +1,3 @@
+
+
+def soldier_position():

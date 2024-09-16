@@ -39,3 +39,11 @@ def game_field():
 matrix = game_field()
 for i in matrix:
     print(i)
+
+def grass_positions():
+    grass_positions_list = []
+    for i in range(20):
+        grass_x = random.randrange(consts.SCREEN_WIDTH - 50)
+        grass_y = random.randrange(consts.SCREEN_HEIGHT - 50)
+        grass_positions_list.append((grass_x, grass_y))
+    return grass_positions_list
