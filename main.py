@@ -20,5 +20,6 @@ def handling_user_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             state["is_window_open"] = False
+    print()
 main()
 handling_user_events()
