@@ -1,15 +1,11 @@
 import pygame
 
+from screen import screen, screen_update
 
+def main():
+    screen_update()
 
-
-
-
-
-
-
-
-
-print()
 def handling_user_events():
-    print()
+    screen_update()
+
+main()

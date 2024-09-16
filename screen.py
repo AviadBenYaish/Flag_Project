@@ -1,5 +1,8 @@
 import pygame
-screen = pygame.display.set_mode((1280, 640))
+
+import consts
+while True:
+    screen = pygame.display.set_mode((1280, 640))
 
 def screen_update():
-    print()
+    screen.fill(consts.BACKGROUND_COLOR)
