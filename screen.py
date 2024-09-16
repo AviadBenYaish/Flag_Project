@@ -2,7 +2,6 @@ import pygame
 
 import consts
 from game_field import grass_positions
-from soldier import soldier_position
 
 screen = pygame.display.set_mode((consts.SCREEN_WIDTH, consts.SCREEN_HEIGHT))
 positions_of_grass = grass_positions()

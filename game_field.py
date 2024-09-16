@@ -36,9 +36,7 @@ def game_field():
     return game_matrix
 
 
-matrix = game_field()
-for i in matrix:
-    print(i)
+
 
 def grass_positions():
     grass_positions_list = []
