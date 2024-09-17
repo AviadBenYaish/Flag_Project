@@ -28,8 +28,8 @@ def moving_left(soldier_position):
     soldier_position[1] -= 1
     if soldier_position[1] >= 0:
         return tuple(soldier_position)
-    elif soldier_position[0] < 0:
-        soldier_position[0] = 0
+    elif soldier_position[1] < 0:
+        soldier_position[1] = 0
         return tuple(soldier_position)
 #   fix left function
 

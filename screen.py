@@ -2,9 +2,17 @@ import pygame
 from game_field import get_x_y_position
 import consts
 from game_field import grass_positions
-
+pygame.init()
 screen = pygame.display.set_mode((consts.SCREEN_WIDTH, consts.SCREEN_HEIGHT))
 positions_of_grass = grass_positions()
+
+# text_font = pygame.font.SysFont('Arial', 30)
+#
+#
+# def winning_message(text, font, text_color, x, y):
+#     img = font.render(text, True, text_color)
+#     screen.blit(img, (x, y))
+
 
 
 def screen_update(state):
@@ -13,6 +21,9 @@ def screen_update(state):
     draw_background_bombs()
     draw_soldier(state["soldier_position"])
     draw_flag()
+    if state["state"] == consts.WINING_STATE:
+        print()
+    # winning_message('YOU WIN', text_font, (0, 0, 0), 220, 150)
     pygame.display.flip()
 
 
@@ -21,6 +32,8 @@ def draw_grass():
         image = pygame.transform.scale(consts.GRASS_IMAGE, (50, 50))
         image_rect = image.get_rect(topleft=position)
         screen.blit(image, image_rect)
+
+
 def draw_flag():
     flag_position = get_x_y_position(consts.FLAG_POSITION)
     image = pygame.transform.scale(consts.FLAG_IMAGE, (100, 100))

@@ -13,16 +13,23 @@ state = {
     "is_moving": False,
 }
 
+
 def main():
     pygame.init()
     while state["is_window_open"]:
         handling_user_events()
         if state["is_moving"]:
-            print(state["is_moving"])
-            if hit_mine(state["soldier_position"]): # to do game_field.game_matrix
-                state["state"] = consts.LOSING_STATE
+            print(is_win(state["soldier_position"]))
+            if is_win(state["soldier_position"]):
+                state["state"] = consts.WINING_STATE
+            # if win function add!!!
+            # print(state["is_moving"])
+            # # if hit_mine(state["soldier_position"]): # to do game_field.game_matrix
+            #     state["state"] = consts.LOSING_STATE
             state["is_moving"] = False
+
         screen_update(state)
+
 
 def handling_user_events():
     for event in pygame.event.get():
@@ -42,6 +49,17 @@ def handling_user_events():
                 state["soldier_position"] = soldier.moving_left(state["soldier_position"])
                 state["is_moving"] = True
 
+def is_win(soldier_position):
+    soldier_position = list(soldier_position)
+    for num in range(3):
+        if 21 <= (soldier_position[0] + num) and (soldier_position[0] + num <= 23) and 46 <= (
+                soldier_position[1] + 1) and (soldier_position[1] + 1) <= 49:
+            return True
+        elif 21 <= (soldier_position[0] + 2) and (soldier_position[0] + 2 <= 23) and 46 <= (soldier_position[1]+1) and (
+        soldier_position[1]+1) <= 49:
+            return True
+        else:
+            return False
 
 main()
 handling_user_events()

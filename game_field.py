@@ -2,13 +2,15 @@ import consts
 import random
 
 game_matrix = []
+
+
 def game_field():
     global game_matrix
     bomb_count = 0
     game_matrix = []
-    for i in range(25):
+    for i in range(consts.GAME_MATRIX_ROWS):
         game_row = []
-        for j in range(50):
+        for j in range(consts.GAME_MATRIX_COLOUMNS):
             if 21 <= i and i <= 23 and 46 <= j and j <= 49:
                 game_row.append(consts.SQUARE_FLAG)
 
@@ -16,22 +18,29 @@ def game_field():
                 game_row.append(consts.SQUARE_EMPTY)
 
         game_matrix.append(game_row)
-    while bomb_count < 20:
-        random_row = random.randint(0, 24)
-        random_coll = random.randint(0, 47)
+    while bomb_count < consts.BOMBS_AMOUNT:
+        random_row = random.randint(0, consts.GAME_MATRIX_ROWS - 1)
+        random_coll = random.randint(0, consts.GAME_MATRIX_COLOUMNS - 3 )
         if game_matrix[random_row][random_coll] != consts.SQUARE_BOMB and game_matrix[random_row][
             random_coll] != consts.SQUARE_FLAG:
+            if random_row != 3 or random_coll not in [0, 1]:
 
-            if game_matrix[random_row][random_coll + 2] != consts.SQUARE_BOMB and game_matrix[random_row][
-                random_coll + 2] != consts.SQUARE_FLAG:
-                bomb_count += 1
-                game_matrix[random_row][random_coll] = consts.SQUARE_BOMB
-                game_matrix[random_row][random_coll + 1] = consts.SQUARE_BOMB
-                game_matrix[random_row][random_coll + 2] = consts.SQUARE_BOMB
+                if random_row > 2 and random_coll < 48:
 
-    # שפצצה לא תצא איפה שהיה הגוף שמחקתי לתקן מחר
+
+                    if game_matrix[random_row][random_coll + 2] != consts.SQUARE_BOMB and game_matrix[random_row][
+                        random_coll + 2] != consts.SQUARE_FLAG:
+                        bomb_count += 1
+                        game_matrix[random_row][random_coll] = consts.SQUARE_BOMB
+                        game_matrix[random_row][random_coll + 1] = consts.SQUARE_BOMB
+                        game_matrix[random_row][random_coll + 2] = consts.SQUARE_BOMB
+
     return game_matrix
-print(game_field())
+
+
+for i in game_field():
+    print(i)
+
 
 
 def grass_positions():
@@ -49,6 +58,7 @@ def get_x_y_position(grid_position):
     x = col * consts.BLOCK_SIZE[0]
     y = row * consts.BLOCK_SIZE[0]
     return (x, y)
+
 
 def hit_mine(soldier_position, game_matrix_):
     print(game_matrix_)
