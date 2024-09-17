@@ -22,7 +22,7 @@ def create_game_field():
         if game_matrix[random_row][random_coll] != consts.SQUARE_BOMB and game_matrix[random_row][
             random_coll] != consts.SQUARE_FLAG:
             if random_row != 3 or random_coll not in [0, 1]:
-                if random_row > 2 and random_coll < 48:
+                if random_row > 2 and random_coll < 47:
 
                     if game_matrix[random_row][random_coll + 2] != consts.SQUARE_BOMB and game_matrix[random_row][
                         random_coll + 2] != consts.SQUARE_FLAG:

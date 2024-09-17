@@ -6,13 +6,13 @@ from helpers import grass_positions, get_x_y_position
 screen = pygame.display.set_mode((consts.SCREEN_WIDTH, consts.SCREEN_HEIGHT))
 positions_of_grass = grass_positions()
 
+
 # text_font = pygame.font.SysFont('Arial', 30)
 #
 #
-# def winning_message(text, font, text_color, x, y):
-#     img = font.render(text, True, text_color)
-#     screen.blit(img, (x, y))
-
+def message(text, font, text_color, x, y):
+    img = font.render(text, True, text_color)
+    screen.blit(img, (x, y))
 
 
 def screen_update(state):
@@ -28,15 +28,17 @@ def screen_update(state):
         draw_booms()
         draw_soldier(state["soldier_position"])
     if state["state"] == consts.WINING_STATE:
-        print()
-    # winning_message('YOU WIN', text_font, (0, 0, 0), 220, 150)
+        winning_message()
     pygame.display.flip()
+
 
 def draw_grass():
     for position in positions_of_grass:
         image = pygame.transform.scale(consts.GRASS_IMAGE, (50, 50))
         image_rect = image.get_rect(topleft=position)
         screen.blit(image, image_rect)
+
+
 def draw_flag():
     flag_position = get_x_y_position(consts.FLAG_POSITION)
     image = pygame.transform.scale(consts.FLAG_IMAGE, (100, 100))
@@ -82,3 +84,19 @@ def draw_boom(position):
     image = pygame.transform.scale(consts.BOMB_IMAGE, (consts.BLOCK_SIZE[0] * 3, consts.BLOCK_SIZE[0]))
     image_rect = image.get_rect(topleft=boom_position)
     screen.blit(image, image_rect)
+
+
+def winning_message():
+    draw_massage(consts.WINNING_MASSAGE, consts.WINING_FONT_SIZE, (0, 0, 0), consts.WINING_FONT_LOCATION)
+
+
+def draw_massage(massage, font_size, text_color, location):
+
+
+    font = pygame.font.SysFont(consts.FONT_NAME, font_size, bold=True)
+    text_img = font.render(massage, True, text_color)
+    text_width = text_img.get_width()
+    text_height = text_img.get_height()
+    location_x = location[0] - text_width / 2
+    location_y = location[1] - text_height / 2
+    screen.blit(text_img, (location_x, location_y))
