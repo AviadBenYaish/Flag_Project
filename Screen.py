@@ -22,7 +22,6 @@ def screen_update(state):
         draw_soldier(state["soldier_position"], state["state"])
     if state["state"] == consts.LOSING_STATE:
         losing_message()
-        draw_soldier(state["soldier_position"], state["state"])
     if state["state"] == consts.WINING_STATE:
         winning_message()
     pygame.display.flip()
