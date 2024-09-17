@@ -17,3 +17,5 @@ def get_x_y_position(grid_position):
     x = col * consts.BLOCK_SIZE[0]
     y = row * consts.BLOCK_SIZE[0]
     return x, y
+
+

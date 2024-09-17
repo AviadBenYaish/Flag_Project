@@ -50,3 +50,11 @@ def hit_mine(soldier_position):
     if game_matrix[leg1[0]][leg1[1]] != consts.SQUARE_BOMB and game_matrix[leg2[0]][leg2[1]] != consts.SQUARE_BOMB:
         return False
     return True
+
+
+def booms_position():
+    booms = []
+    for row_i in range(len(game_matrix)):
+        for col_i in range(len(game_matrix)):
+            booms.append((row_i, col_i))
+    return booms

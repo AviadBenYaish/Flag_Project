@@ -3,6 +3,7 @@ import pygame
 import game_field
 import consts
 import soldier
+from Database import create_file, add_game_position, load_game_position
 from Screen import screen_update
 
 state = {
@@ -14,9 +15,13 @@ state = {
 
 def main():
     pygame.init()
+    create_file()
     game_field.create_game_field()
     while state["is_window_open"]:
         if state["state"] == consts.BOOM_STATE:
+
+            add_game_position(state["soldier_position"], 4)
+            load_game_position(4)
             pygame.time.wait(1000)
             pygame.event.clear()
             state["state"] = consts.RUNNING_STATE
