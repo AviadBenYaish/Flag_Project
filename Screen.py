@@ -12,7 +12,6 @@ def screen_update(state):
     if state["state"] == consts.RUNNING_STATE:
         screen.fill(consts.BACKGROUND_COLOR)
         draw_grass()
-        draw_background_bombs()
         draw_soldier(state["soldier_position"], state["state"])
         draw_flag()
     if state["state"] == consts.BOOM_STATE:
