@@ -13,7 +13,7 @@ def screen_update(state):
         screen.fill(consts.BACKGROUND_COLOR)
         draw_grass()
         draw_background_bombs()
-        draw_soldier(state["soldier_position"])
+        draw_soldier(state["soldier_position"], state["state"])
         draw_flag()
     if state["state"] == consts.BOOM_STATE:
         screen.fill(consts.BACKGROUND_COLOR_BOOMS)
@@ -22,7 +22,7 @@ def screen_update(state):
         draw_soldier(state["soldier_position"], state["state"])
     if state["state"] == consts.LOSING_STATE:
         losing_message()
-        draw_soldier(state["soldier_position"])
+        draw_soldier(state["soldier_position"], state["state"])
     if state["state"] == consts.WINING_STATE:
         winning_message()
     pygame.display.flip()
@@ -39,9 +39,12 @@ def draw_flag():
     screen.blit(image, image_rect)
 
 
-def draw_soldier(position):
+def draw_soldier(position, soldier_state):
+    if soldier_state == consts.BOOM_STATE:
+        image = pygame.transform.scale(consts.PLAYER_IMAGE_NIGHT, consts.PLAYER_SIZE)
+    else:
+        image = pygame.transform.scale(consts.PLAYER_IMAGE, consts.PLAYER_SIZE)
     soldier_position_x_y = get_x_y_position(position)
-    image = pygame.transform.scale(consts.PLAYER_IMAGE, consts.PLAYER_SIZE)
     image_rect = image.get_rect(topleft=(soldier_position_x_y[0], soldier_position_x_y[1] + consts.BLOCK_SIZE[0] / 3))
     screen.blit(image, image_rect)
 
