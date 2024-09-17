@@ -1,5 +1,3 @@
-from itertools import count
-
 import pygame
 import consts
 import game_field
@@ -7,6 +5,14 @@ from helpers import grass_positions, get_x_y_position
 
 screen = pygame.display.set_mode((consts.SCREEN_WIDTH, consts.SCREEN_HEIGHT))
 positions_of_grass = grass_positions()
+
+# text_font = pygame.font.SysFont('Arial', 30)
+#
+#
+# def winning_message(text, font, text_color, x, y):
+#     img = font.render(text, True, text_color)
+#     screen.blit(img, (x, y))
+
 
 
 def screen_update(state):
@@ -16,11 +22,14 @@ def screen_update(state):
         draw_background_bombs()
         draw_soldier(state["soldier_position"])
         draw_flag()
-    elif state["state"] == consts.BOOM_STATE:
+    if state["state"] == consts.BOOM_STATE:
         screen.fill(consts.BACKGROUND_COLOR_BOOMS)
         draw_background_bombs()
         draw_booms()
         draw_soldier(state["soldier_position"])
+    if state["state"] == consts.WINING_STATE:
+        print()
+    # winning_message('YOU WIN', text_font, (0, 0, 0), 220, 150)
     pygame.display.flip()
 
 def draw_grass():

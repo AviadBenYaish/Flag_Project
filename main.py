@@ -25,10 +25,10 @@ def main():
         if state["is_moving"]:
             if game_field.hit_mine(state["soldier_position"]):
                 state["state"] = consts.LOSING_STATE
+            if is_win(state["soldier_position"]):
+                state["state"] = consts.WINING_STATE
             state["is_moving"] = False
         screen_update(state)
-
-
 
 def handling_user_events():
     for event in pygame.event.get():
@@ -51,6 +51,17 @@ def handling_user_events():
                     state["soldier_position"] = soldier.moving_left(state["soldier_position"])
                     state["is_moving"] = True
 
+def is_win(soldier_position):
+    soldier_position = list(soldier_position)
+    for num in range(3):
+        if 21 <= (soldier_position[0] + num) and (soldier_position[0] + num <= 23) and 46 <= (
+                soldier_position[1] + 1) and (soldier_position[1] + 1) <= 49:
+            return True
+        elif 21 <= (soldier_position[0] + 2) and (soldier_position[0] + 2 <= 23) and 46 <= (soldier_position[1]+1) and (
+        soldier_position[1]+1) <= 49:
+            return True
+        else:
+            return False
 
 main()
 handling_user_events()
