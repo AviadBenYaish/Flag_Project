@@ -1,4 +1,6 @@
 import pygame
+
+
 GAME_MATRIX_ROWS = 25
 GAME_MATRIX_COLOUMNS =50
 SCREEN_WIDTH = 1280
@@ -17,6 +19,7 @@ FLAG_IMAGE = pygame.image.load("./images/flag.png")
 FLAG_POSITION = (21,46)
 LINES_COLOR = (0, 102, 0)
 PLAYER_IMAGE = pygame.image.load("./images/soldier.png")
+PLAYER_IMAGE_NIGHT = pygame.image.load("./images/soldier_nigth.png")
 PLAYER_INITIAL_POSITION = (0, 0)
 PLAYER_INITIAL_POSITION_SCREEN = (0, BLOCK_SIZE[0] / 3)
 PLAYER_SIZE = (410 / 6, 512 / 6)
@@ -26,3 +29,7 @@ LOSING_STATE = 2
 WINING_STATE = 3
 BOOM_STATE = 4
 BOMBS_AMOUNT = 20
+FONT_NAME = "Calibri"
+LOSE_FONT_SIZE = int(0.15 * SCREEN_WIDTH)
+LOSE_FONT_LOCATION = (int(SCREEN_WIDTH / 2), int(SCREEN_HEIGHT / 2))
+LOSING_MASSAGE = "You lost!"

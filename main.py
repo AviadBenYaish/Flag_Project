@@ -20,6 +20,12 @@ def main():
             pygame.time.wait(1000)
             pygame.event.clear()
             state["state"] = consts.RUNNING_STATE
+        if state["state"] == consts.LOSING_STATE:
+            pygame.time.wait(3000)
+            break
+        if state["state"] == consts.WINING_STATE:
+            pygame.time.wait(3000)
+            break
         handling_user_events()
         if state["is_moving"]:
             if game_field.hit_mine(state["soldier_position"]):

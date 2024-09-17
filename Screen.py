@@ -1,3 +1,5 @@
+from time import sleep
+
 import pygame
 import consts
 import game_field
@@ -6,12 +8,6 @@ from helpers import grass_positions, get_x_y_position
 screen = pygame.display.set_mode((consts.SCREEN_WIDTH, consts.SCREEN_HEIGHT))
 positions_of_grass = grass_positions()
 
-# text_font = pygame.font.SysFont('Arial', 30)
-#
-#
-# def winning_message(text, font, text_color, x, y):
-#     img = font.render(text, True, text_color)
-#     screen.blit(img, (x, y))
 
 
 
@@ -20,16 +16,15 @@ def screen_update(state):
         screen.fill(consts.BACKGROUND_COLOR)
         draw_grass()
         draw_background_bombs()
-        draw_soldier(state["soldier_position"])
+        draw_soldier(state["soldier_position"], state["state"])
         draw_flag()
     if state["state"] == consts.BOOM_STATE:
         screen.fill(consts.BACKGROUND_COLOR_BOOMS)
         draw_background_bombs()
         draw_booms()
-        draw_soldier(state["soldier_position"])
-    if state["state"] == consts.WINING_STATE:
-        print()
-    # winning_message('YOU WIN', text_font, (0, 0, 0), 220, 150)
+        draw_soldier(state["soldier_position"], state["state"])
+    if state["state"] == consts.LOSING_STATE:
+        losing_message()
     pygame.display.flip()
 
 def draw_grass():
@@ -44,9 +39,12 @@ def draw_flag():
     screen.blit(image, image_rect)
 
 
-def draw_soldier(position):
+def draw_soldier(position, soldier_state):
+    if soldier_state == consts.BOOM_STATE:
+        image = pygame.transform.scale(consts.PLAYER_IMAGE_NIGHT, consts.PLAYER_SIZE)
+    else:
+        image = pygame.transform.scale(consts.PLAYER_IMAGE, consts.PLAYER_SIZE)
     soldier_position_x_y = get_x_y_position(position)
-    image = pygame.transform.scale(consts.PLAYER_IMAGE, consts.PLAYER_SIZE)
     image_rect = image.get_rect(topleft=(soldier_position_x_y[0], soldier_position_x_y[1] + consts.BLOCK_SIZE[0] / 3))
     screen.blit(image, image_rect)
 
@@ -82,3 +80,17 @@ def draw_boom(position):
     image = pygame.transform.scale(consts.BOMB_IMAGE, (consts.BLOCK_SIZE[0] * 3, consts.BLOCK_SIZE[0]))
     image_rect = image.get_rect(topleft=boom_position)
     screen.blit(image, image_rect)
+
+def losing_message():
+    draw_massage(consts.LOSING_MASSAGE, consts.LOSE_FONT_SIZE, "black", consts.LOSE_FONT_LOCATION)
+
+
+def draw_massage(message, font_size, color, location):
+    font = pygame.font.SysFont(consts.FONT_NAME, font_size, bold=True)
+    text_img = font.render(message, True, color)
+    text_width = text_img.get_width()
+    text_height = text_img.get_height()
+    location_x = location[0] - text_width / 2
+    location_y = location[1] - text_height / 2
+    screen.blit(text_img, (location_x, location_y))
+
