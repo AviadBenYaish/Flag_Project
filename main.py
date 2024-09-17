@@ -1,3 +1,5 @@
+import time
+import pygame as pg
 
 import pygame
 import game_field
@@ -5,12 +7,16 @@ import consts
 import soldier
 from Screen import screen_update
 
+pg.init()
+click_down, click_up = False, False
+
 state = {
     "state": consts.RUNNING_STATE,
     "soldier_position": consts.PLAYER_INITIAL_POSITION,
     "is_window_open": True,
     "is_moving": False,
 }
+
 
 def main():
     pygame.init()
@@ -35,6 +41,7 @@ def main():
             state["is_moving"] = False
         screen_update(state)
 
+
 def handling_user_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -55,6 +62,15 @@ def handling_user_events():
                 if event.key == pygame.K_LEFT:
                     state["soldier_position"] = soldier.moving_left(state["soldier_position"])
                     state["is_moving"] = True
+                if event.key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6, pygame.K_7,
+                                 pygame.K_8, pygame.K_9]:
+                    int(pygame.key.name(event.key))
+                    
+                if event.key in [pygame.K_KP1, pygame.K_KP2, pygame.K_KP3, pygame.K_KP4, pygame.K_KP5, pygame.K_KP6,
+                                 pygame.K_KP7, pygame.K_KP8, pygame.K_KP9]:
+                    list_ = eval(pygame.key.name(event.key))
+                    int(list_[0])
+
 
 def is_win(soldier_position):
     soldier_position = list(soldier_position)
@@ -62,11 +78,13 @@ def is_win(soldier_position):
         if 21 <= (soldier_position[0] + num) and (soldier_position[0] + num <= 23) and 46 <= (
                 soldier_position[1] + 1) and (soldier_position[1] + 1) <= 49:
             return True
-        elif 21 <= (soldier_position[0] + 2) and (soldier_position[0] + 2 <= 23) and 46 <= (soldier_position[1]+1) and (
-        soldier_position[1]+1) <= 49:
+        elif 21 <= (soldier_position[0] + 2) and (soldier_position[0] + 2 <= 23) and 46 <= (
+                soldier_position[1] + 1) and (
+                soldier_position[1] + 1) <= 49:
             return True
         else:
             return False
+
 
 main()
 handling_user_events()
