@@ -1,8 +1,10 @@
 import consts
 import random
 
+from Screen import draw_boom
+
 game_matrix = []
-def game_field():
+def create_game_field():
     global game_matrix
     bomb_count = 0
     for i in range(25):
@@ -33,31 +35,11 @@ def game_field():
                     game_matrix[random_row][random_coll + 1] = consts.SQUARE_BOMB
                     game_matrix[random_row][random_coll + 2] = consts.SQUARE_BOMB
 
-    return game_matrix
 
-
-
-
-def grass_positions():
-    grass_positions_list = []
-    for i in range(20):
-        grass_x = random.randrange(consts.SCREEN_WIDTH - 50)
-        grass_y = random.randrange(consts.SCREEN_HEIGHT - 50)
-        grass_positions_list.append((grass_x, grass_y))
-    return grass_positions_list
-
-
-def get_x_y_position(grid_position):
-    row = grid_position[0]
-    col = grid_position[1]
-    x = col * consts.BLOCK_SIZE[0]
-    y = row * consts.BLOCK_SIZE[0]
-    return x, y
-
-def hit_mine(soldier_position, game_matrix_):
-    print(game_matrix_)
+def hit_mine(soldier_position):
     leg1 = (soldier_position[0] + 3, soldier_position[1])
     leg2 = (soldier_position[0] + 3, soldier_position[1] + 1)
     if game_matrix[leg1[0]][leg1[1]] != consts.SQUARE_BOMB and game_matrix[leg2[0]][leg2[1]] != consts.SQUARE_BOMB:
         return False
     return True
+

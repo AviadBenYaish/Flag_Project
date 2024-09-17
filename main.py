@@ -1,10 +1,10 @@
+from time import sleep
+
 import pygame
 import game_field
-import soldier
-from soldier import *
 import consts
-from game_field import *
-from screen import screen, screen_update
+import soldier
+from Screen import screen_update
 
 state = {
     "state": consts.RUNNING_STATE,
@@ -15,32 +15,41 @@ state = {
 
 def main():
     pygame.init()
+    game_field.create_game_field()
     while state["is_window_open"]:
+        if state["state"] == consts.BOOM_STATE:
+            pygame.time.wait(1000)
+            pygame.event.clear()
+            state["state"] = consts.RUNNING_STATE
         handling_user_events()
         if state["is_moving"]:
-            print(state["is_moving"])
-            if hit_mine(state["soldier_position"]): # to do game_field.game_matrix
+            if game_field.hit_mine(state["soldier_position"]):
                 state["state"] = consts.LOSING_STATE
             state["is_moving"] = False
         screen_update(state)
+
+
 
 def handling_user_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             state["is_window_open"] = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                state["soldier_position"] = soldier.moving_up(state["soldier_position"])
-                state["is_moving"] = True
-            if event.key == pygame.K_DOWN:
-                state["soldier_position"] = soldier.moving_down(state["soldier_position"])
-                state["is_moving"] = True
-            if event.key == pygame.K_RIGHT:
-                state["soldier_position"] = soldier.moving_right(state["soldier_position"])
-                state["is_moving"] = True
-            if event.key == pygame.K_LEFT:
-                state["soldier_position"] = soldier.moving_left(state["soldier_position"])
-                state["is_moving"] = True
+        if state["state"] != consts.LOSING_STATE and state["state"] != consts.WINING_STATE:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    state["state"] = consts.BOOM_STATE
+                if event.key == pygame.K_UP:
+                    state["soldier_position"] = soldier.moving_up(state["soldier_position"])
+                    state["is_moving"] = True
+                if event.key == pygame.K_DOWN:
+                    state["soldier_position"] = soldier.moving_down(state["soldier_position"])
+                    state["is_moving"] = True
+                if event.key == pygame.K_RIGHT:
+                    state["soldier_position"] = soldier.moving_right(state["soldier_position"])
+                    state["is_moving"] = True
+                if event.key == pygame.K_LEFT:
+                    state["soldier_position"] = soldier.moving_left(state["soldier_position"])
+                    state["is_moving"] = True
 
 
 main()
